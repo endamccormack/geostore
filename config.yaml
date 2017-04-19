@@ -1,0 +1,15 @@
+defaultName: Stranger
+template: Hello, %s!
+
+database:
+  # the name of your JDBC driver
+  driverClass: org.postgresql.Driver
+
+  # the username
+  user: postgres
+
+  # the password
+  password: postgres
+
+  # the JDBC URL
+  url: jdbc:postgresql://localhost:5432/geostore

@@ -1,5 +1,6 @@
 package geostore;
 
+import geostore.dao.GeostoreDao;
 import geostore.health.TemplateHealthCheck;
 import geostore.resources.GeostoreResource;
 import io.dropwizard.Application;
@@ -9,6 +10,7 @@ import io.dropwizard.flyway.FlywayFactory;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import org.flywaydb.core.Flyway;
+import org.skife.jdbi.v2.DBI;
 
 import javax.sql.DataSource;
 
@@ -42,10 +44,14 @@ public class GeostoreApplication extends Application<GeostoreConfiguration> {
         final FlywayFactory factory = new FlywayFactory();
         final Flyway flyway = factory.build(dataSource);
 
-        flyway.baseline();
-        flyway.migrate();
+//        flyway.baseline();
+//        flyway.migrate();
 
-        environment.jersey().register(new GeostoreResource());
+        DBI dbi = new DBI(dataSource);
+
+        GeostoreDao dao = dbi.onDemand(GeostoreDao.class);
+
+        environment.jersey().register(new GeostoreResource(dao));
         final TemplateHealthCheck healthCheck =
                 new TemplateHealthCheck(configuration.getTemplate());
         environment.healthChecks().register("template", healthCheck);

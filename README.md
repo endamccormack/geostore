@@ -1,4 +1,6 @@
 1. `brew install postgis`
-2. `./db.sh`
-3. `./gradlew clean build`
-4. `./gradlew run`
+2. `brew install gdal --with-postgresql  --with-libkml`
+`pip install csvkit`
+3. `./db.sh`
+4. `./gradlew clean build`
+5. `./gradlew run`

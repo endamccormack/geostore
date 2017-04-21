@@ -1,0 +1,3 @@
+[submodule "external-data/uk_local_authority_names_and_codes"]
+	path = external-data/uk_local_authority_names_and_codes
+	url = https://github.com/ajparsons/uk_local_authority_names_and_codes/
